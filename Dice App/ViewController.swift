@@ -15,19 +15,20 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //Disable reset button in the beginning
-        resetButton.isEnabled = false
+        resetButton.isHidden = true
+        
     }
     
     @IBAction func rollButtonPressed(_ sender: UIButton) {
-        print("Roll button is pressed")
-        resetButton.isEnabled = true
+        resetButton.isHidden = false
         diceImageView1.alpha = 1
         diceImageView2.alpha = 1
 
-        var diceFaces = [UIImage(imageLiteralResourceName: "DiceOne"), UIImage(imageLiteralResourceName: "DiceTwo"), UIImage(imageLiteralResourceName: "DiceThree"), UIImage(imageLiteralResourceName: "DiceFour"), UIImage(imageLiteralResourceName: "DiceFive"), UIImage(imageLiteralResourceName: "DiceSix")]
+        let diceFaces = [UIImage(imageLiteralResourceName: "DiceOne"), UIImage(imageLiteralResourceName: "DiceTwo"), UIImage(imageLiteralResourceName: "DiceThree"), UIImage(imageLiteralResourceName: "DiceFour"), UIImage(imageLiteralResourceName: "DiceFive"), UIImage(imageLiteralResourceName: "DiceSix")]
         // Randomize Images with each button press
-        diceImageView1.image = diceFaces[Int.random(in: 0...5)]
-        diceImageView2.image = diceFaces[Int.random(in: 0...5)]
+        diceImageView1.image = diceFaces.randomElement()
+        diceImageView2.image = diceFaces.randomElement()
+        // randomElement() = Int.random(in: 0...5)
     }
 
     @IBAction func resetButtonPressed(_ sender: UIButton) {
@@ -36,6 +37,7 @@ class ViewController: UIViewController {
         diceImageView2.image = UIImage(imageLiteralResourceName: "DiceOne")
         diceImageView1.alpha = 0.5
         diceImageView2.alpha = 0.5
+        resetButton.isHidden = true
     }
 
 
